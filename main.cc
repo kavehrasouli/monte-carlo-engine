@@ -1,15 +1,4 @@
-// main.cc - High-performance Monte Carlo examples
-#include <iostream>
-#include <chrono>
-#include <random>
-#include <thread>
-#include <algorithm>
-#include <cmath>
-#include <vector>
-#include "monte_carlo_engine.h"
-
-using namespace std;
-using namespace mc_engine;
+#include "main.ih"
 
 // Pi estimation simulation
 uint64_t pi_simulation(uint64_t n_samples, unsigned int seed) {
@@ -49,7 +38,7 @@ uint64_t poker_simulation(uint64_t n_samples, unsigned int seed) {
             suits[card / 13]++;
         }
         
-        // Check for flush (all same suit)
+        // Check for flush
         for (int suit = 0; suit < 4; ++suit) {
             if (suits[suit] == 5) {
                 flush_count++;

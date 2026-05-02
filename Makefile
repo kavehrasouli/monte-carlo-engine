@@ -1,6 +1,3 @@
-# High-Performance Makefile for Monte Carlo Engine
-# Optimized for macOS with maximum performance flags
-
 # Compiler settings
 CXX := clang++
 TARGET := monte_carlo
@@ -38,16 +35,16 @@ LDFLAGS := -flto \
            -Wl,-dead_strip \
            -stdlib=libc++
 
-# Warning flags (optional, can be removed for maximum speed)
+# Warning flags
 WARNINGS := -Wall -Wextra -Wpedantic -Wno-unused-parameter
 
-# Debug flags (only used in debug build)
+# Debug flags
 DEBUG_FLAGS := -g -O0 -DDEBUG -fsanitize=address -fsanitize=undefined
 
 # Build rules
 .PHONY: all clean debug release fast help simple
 
-# Default target - maximum performance
+# Default target
 all: release
 
 # Simple test build
@@ -126,7 +123,7 @@ clean:
 	@rm -f $(TARGET) $(OBJECTS) $(DEPS) *.profdata *.profraw
 	@echo "Clean complete"
 
-# Install (copy to /usr/local/bin)
+# Install
 install: release
 	@echo "Installing $(TARGET) to /usr/local/bin..."
 	@cp $(TARGET) /usr/local/bin/

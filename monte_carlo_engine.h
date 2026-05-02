@@ -177,6 +177,6 @@ double quick_pi_estimation(F&& simulation_func, uint64_t samples, unsigned int t
     return engine.execute_pi_estimation(samples);
 }
 
-} // namespace mc_engine
+}
 
 #endif
