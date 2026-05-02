@@ -23,13 +23,6 @@ double pi = quick_pi_estimation(pi_sim, 1'000'000'000);
 // → 3.14159, error 2.8e-6, ~0.9s wall time on 10 cores
 ```
 
-## Design notes
-
-- **Cache-line alignment** — each thread's result is padded to 64 bytes to prevent false sharing between cores.
-- **Type-deduced aggregation** — `function_traits` infers the return type at compile time; `static_assert` enforces correct usage of `execute_ratio` vs `execute_average`.
-- **Adaptive thread count** — threads are capped at `total_samples / 10,000` to avoid spawning threads whose overhead would exceed their work.
-- **Independent RNG seeds** — thread seeds are mixed with `thread_id * 0x9e3779b9` (Knuth hash) to prevent correlated random streams.
-
 ## Benchmarks
 
 10-core machine, `-O3 -march=native -flto`:
