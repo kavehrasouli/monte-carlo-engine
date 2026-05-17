@@ -58,10 +58,11 @@ int main(int argc, char* argv[]) {
     cout << "Samples: " << total_samples << "\n";
     cout << "Threads: " << thread::hardware_concurrency() << "\n\n";
     
-    // Pi estimation with specialized method
+    // Pi estimation
     {
         auto start = chrono::high_resolution_clock::now();
-        double pi_est = quick_pi_estimation(pi_simulation, total_samples);
+        auto engine = make_monte_carlo_engine(pi_simulation);
+        double pi_est = 4.0 * engine.execute_ratio(total_samples);
         auto end = chrono::high_resolution_clock::now();
         auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);
         

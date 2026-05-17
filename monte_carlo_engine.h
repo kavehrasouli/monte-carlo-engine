@@ -91,7 +91,7 @@ public:
         return static_cast<double>(sum) / static_cast<double>(total_samples);
     }
     
-    // Specialized method for counting simulations (like pi estimation)
+    // Specialized method for counting simulations
     double execute_ratio(uint64_t total_samples) {
         static_assert(std::is_integral_v<ResultType>, "Ratio requires integral type");
         
@@ -99,11 +99,6 @@ public:
         return static_cast<double>(total_count) / static_cast<double>(total_samples);
     }
     
-    // pi estimation convenience method
-    double execute_pi_estimation(uint64_t total_samples) {
-        return 4.0 * execute_ratio(total_samples);
-    }
-
 private:
     SimulationFunction simulation_;
     unsigned int num_threads_;
@@ -168,13 +163,6 @@ template<typename F>
 auto quick_monte_carlo(F&& simulation_func, uint64_t samples, unsigned int threads = 0) {
     auto engine = make_monte_carlo_engine(std::forward<F>(simulation_func), threads);
     return engine.execute(samples);
-}
-
-// Convenience function for pi estimation
-template<typename F>
-double quick_pi_estimation(F&& simulation_func, uint64_t samples, unsigned int threads = 0) {
-    auto engine = make_monte_carlo_engine(std::forward<F>(simulation_func), threads);
-    return engine.execute_pi_estimation(samples);
 }
 
 }
