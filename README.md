@@ -19,7 +19,8 @@ uint64_t pi_sim(uint64_t n, unsigned int seed) {
     return hits;
 }
 
-double pi = quick_pi_estimation(pi_sim, 1'000'000'000);
+auto engine = make_monte_carlo_engine(pi_sim);
+double pi = 4.0 * engine.execute_ratio(1'000'000'000);
 // → 3.14159, error 2.8e-6, ~0.9s wall time on 10 cores
 ```
 
